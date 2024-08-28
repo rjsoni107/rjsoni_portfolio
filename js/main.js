@@ -1,130 +1,153 @@
-(function () {
-    window.scroll(0, 0);
-    "use strict";
+"use strict";
 
-    // Helper function to select elements
-    const select = (el, all = false) => {
-        el = el.trim();
+// Helper function to select elements
+const select = (el, all = false) => {
+    el = el.trim();
+    return all ? [...document.querySelectorAll(el)] : document.querySelector(el);
+};
+
+// Event listener function
+const on = (type, el, listener, all = false) => {
+    const selectEl = select(el, all);
+    if (selectEl) {
         if (all) {
-            return [...document.querySelectorAll(el)];
+            selectEl.forEach(e => e.addEventListener(type, listener));
         } else {
-            return document.querySelector(el);
+            selectEl.addEventListener(type, listener);
         }
-    };
+    }
+};
 
-    // Event listener function
-    const on = (type, el, listener, all = false) => {
-        let selectEl = select(el, all);
-        if (selectEl) {
-            if (all) {
-                selectEl.forEach(e => e.addEventListener(type, listener));
-            } else {
-                selectEl.addEventListener(type, listener);
+// Scroll event listener
+const onScroll = (el, listener) => el.addEventListener('scroll', listener);
+
+// Activate navbar links based on scroll position
+const navbarLinks = select('#navbar .scrollto', true);
+const activateNavbarLinks = () => {
+    const position = window.scrollY + 200;
+    navbarLinks.forEach(navbarlink => {
+        if (!navbarlink.hash) return;
+        const section = select(navbarlink.hash);
+        if (!section) return;
+        if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
+            navbarlink.classList.add('active');
+        } else {
+            navbarlink.classList.remove('active');
+        }
+    });
+};
+
+// Scroll to an element with header offset
+const scrollTo = (el) => {
+    const header = select('#header');
+    const offset = header.classList.contains('header-scrolled') ? header.offsetHeight : header.offsetHeight - 16;
+    const elementPos = select(el).offsetTop;
+    window.scrollTo({
+        top: elementPos - offset,
+        behavior: 'smooth'
+    });
+};
+
+// Toggle header-scrolled class to #header when page is scrolled
+const handleHeaderScrolled = () => {
+    const header = select('#header');
+    if (header) {
+        if (window.scrollY > 60) {
+            header.classList.add('header-scrolled');
+        } else {
+            header.classList.remove('header-scrolled');
+        }
+    }
+};
+
+// Mobile nav toggle
+const toggleMobileNav = () => {
+    const navbar = select('#navbar');
+    navbar.classList.toggle('navbar-mobile');
+    const navToggle = select('.mobile-nav-toggle');
+    navToggle.classList.toggle('bi-list');
+    navToggle.classList.toggle('bi-x');
+};
+
+// Mobile nav dropdowns activate
+const toggleDropdown = (e) => {
+    const navbar = select('#navbar');
+    if (navbar.classList.contains('navbar-mobile')) {
+        e.preventDefault();
+        e.target.nextElementSibling.classList.toggle('dropdown-active');
+    }
+};
+
+// Scroll to element on link click
+const handleScrollTo = (e) => {
+    if (select(e.target.hash)) {
+        e.preventDefault();
+        const navbar = select('#navbar');
+        if (navbar.classList.contains('navbar-mobile')) {
+            toggleMobileNav();
+        }
+        scrollTo(e.target.hash);
+    }
+};
+
+// Typeing Effect for banner 
+const typeEffect = () => {
+    const typedElement = document.querySelector('.typed');
+    const typedItems = typedElement.getAttribute('data-typed-items').split(',');
+    let currentIndex = 0;
+    let currentCharIndex = 0;
+    let typingForward = true;
+
+    const startTyping = () => {
+        const currentText = typedItems[currentIndex];
+
+        if (typingForward) {
+            typedElement.textContent = currentText.substring(0, currentCharIndex);
+            currentCharIndex++;
+
+            if (currentCharIndex > currentText.length) {
+                typingForward = false;
+                setTimeout(startTyping, 1500);
+                return;
+            }
+        } else {
+            typedElement.textContent = currentText.substring(0, currentCharIndex);
+            currentCharIndex--;
+
+            if (currentCharIndex < 0) {
+                typingForward = true;
+                currentIndex = (currentIndex + 1) % typedItems.length;
+                setTimeout(startTyping, 500);
+                return;
             }
         }
+
+        const delay = typingForward ? 80 : 50;
+        setTimeout(startTyping, delay);
     };
 
-    // Scroll event listener
-    const onScroll = (el, listener) => {
-        el.addEventListener('scroll', listener);
-    };
+    startTyping();
+};
 
-    // Activate navbar links based on scroll position
-    const navbarLinks = select('#navbar .scrollto', true);
-    const activateNavbarLinks = () => {
-        let position = window.scrollY + 200;
-        navbarLinks.forEach(navbarlink => {
-            if (!navbarlink.hash) return;
-            let section = select(navbarlink.hash);
-            if (!section) return;
-            if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
-                navbarlink.classList.add('active');
-            } else {
-                navbarlink.classList.remove('active');
-            }
-        });
-    };
+
+// Initialize event listeners
+const init = () => {
+    window.scroll(0, 0);
+    window.addEventListener('load', typeEffect);
     window.addEventListener('load', activateNavbarLinks);
     onScroll(document, activateNavbarLinks);
-
-    // Scroll to an element with header offset
-    const scrollTo = (el) => {
-        let header = select('#header');
-        let offset = header.offsetHeight;
-        if (!header.classList.contains('header-scrolled')) {
-            offset -= 16;
-        }
-        let elementPos = select(el).offsetTop;
-        window.scrollTo({
-            top: elementPos - offset,
-            behavior: 'smooth'
-        });
-    };
-
-    // Toggle header-scrolled class to #header when page is scrolled
-    let selectHeader = select('#header');
-    if (selectHeader) {
-        const headerScrolled = () => {
-            if (window.scrollY > 60) {
-                selectHeader.classList.add('header-scrolled');
-            } else {
-                selectHeader.classList.remove('header-scrolled');
-            }
-        };
-        window.addEventListener('load', headerScrolled);
-        onScroll(document, headerScrolled);
-    }
-
-    // Mobile nav toggle
-    on('click', '.mobile-nav-toggle', function (e) {
-        select('#navbar').classList.toggle('navbar-mobile');
-        this.classList.toggle('bi-list');
-        this.classList.toggle('bi-x');
-    });
-
-    // Mobile nav dropdowns activate
-    on('click', '.navbar .dropdown > a', function (e) {
-        if (select('#navbar').classList.contains('navbar-mobile')) {
-            e.preventDefault();
-            this.nextElementSibling.classList.toggle('dropdown-active');
-        }
-    }, true);
-
-    // Scroll to element on link click
-    on('click', '.scrollto', function (e) {
-        if (select(this.hash)) {
-            e.preventDefault();
-            let navbar = select('#navbar');
-            if (navbar.classList.contains('navbar-mobile')) {
-                navbar.classList.remove('navbar-mobile');
-                let navbarToggle = select('.mobile-nav-toggle');
-                navbarToggle.classList.toggle('bi-list');
-                navbarToggle.classList.toggle('bi-x');
-            }
-            scrollTo(this.hash);
-        }
-    }, true);
+    onScroll(document, handleHeaderScrolled);
+    window.addEventListener('load', handleHeaderScrolled);
+    on('click', '.mobile-nav-toggle', toggleMobileNav);
+    on('click', '.navbar .dropdown > a', toggleDropdown, true);
+    on('click', '.scrollto', handleScrollTo, true);
 
     // Scroll to element on page load with hash links in the URL
     window.addEventListener('load', () => {
-        if (window.location.hash) {
-            if (select(window.location.hash)) {
-                scrollTo(window.location.hash);
-            }
+        if (window.location.hash && select(window.location.hash)) {
+            scrollTo(window.location.hash);
         }
     });
+};
 
-    const typed = select('.typed')
-    if (typed) {
-        let typed_strings = typed.getAttribute('data-typed-items')
-        typed_strings = typed_strings.split(',')
-        new Typed('.typed', {
-            strings: typed_strings,
-            loop: true,
-            typeSpeed: 100,
-            backSpeed: 50,
-            backDelay: 2000
-        });
-    }
-
-})();
+document.addEventListener('DOMContentLoaded', init);
