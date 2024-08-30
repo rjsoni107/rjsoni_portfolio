@@ -30,7 +30,7 @@ h6 {
 
 /*-- header --*/
 #home {
-	background: url(../images/header-bg.png) no-repeat center top;
+	background: url(../images/header-bg.webp) no-repeat center top;
 	background-size: cover;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
