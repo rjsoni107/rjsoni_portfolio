@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 	<meta name="description" content="Rj Soni Portfolio">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Rj Soni</title>
 	<link rel="icon" type="image/png" href="images/favicon.ico" />
 	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
@@ -11,9 +13,6 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 	<link href="css/style.css" rel="stylesheet" type="text/css" />
 	<link href="css/common-style.css" rel="stylesheet" type="text/css" />
-
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 
 <body>
@@ -83,11 +82,12 @@
 								<span class="button-1-edge"></span>
 								<span class="button-1-front text">
 									<a class="text-white text-decoration-none"
-									href="https://drive.google.com/file/d/1kbMn4ipLxrxOxwtxNKBXzK7jKCUpX09b/view?usp=drive_link"
-									target="_blank" rel="noopener noreferrer">
-									<span class="text">Download CV <i class="fas fa-download"></i></span></a>
+									   href="https://drive.google.com/file/d/1kbMn4ipLxrxtxNKBXzK7jKCUpX09b/view?usp=drive_link"
+									   target="_blank" rel="noopener noreferrer">
+										<span class="text">Download CV <i class="fas fa-download"></i></span>
+									</a>
 								</span>
-							  </button>
+							</button>
 						</div>
 					</div>
 					<div class="clearfix"></div>
@@ -142,7 +142,7 @@
 	<div id="services" class="services">
 		<div class="container">
 			<div class="service-head one text-center">
-				<h4>WHAT I DO</h4>
+				<h2>WHAT I DO</h2>
 				<h3>MY <span>Key Projects</span></h3>
 				<span class="border two"></span>
 			</div>
@@ -218,7 +218,7 @@
 	<div id="work" class="work">
 		<div class="container">
 			<div class="service-head text-center">
-				<h4>WHAT I DID</h4>
+				<h2>WHAT I DID</h2>
 				<h3>MY <span>EXPERIENCE</span></h3>
 				<span class="border one"></span>
 			</div>
@@ -329,7 +329,7 @@
 	<div class="blog mt-15" id="blogs">
 		<div class="container">
 			<div class="service-head text-center">
-				<h4>BLOGS</h4>
+				<h2>BLOGS</h2>
 				<h3>MY <span>BLOGS</span></h3>
 				<span class="border one"></span>
 			</div>
@@ -495,7 +495,7 @@
 	<div class="footer" id="contact">
 		<div class="container">
 			<div class="service-head one text-center">
-				<h4>CONTACT ME</h4>
+				<h2>CONTACT ME</h2>
 				<h3>GET <span>IN TOUCH WITH ME</span></h3>
 				<span class="border two"></span>
 			</div>
@@ -534,36 +534,40 @@
 				</div>
 				<div class="col-md-6 mail_right">
 					<form action="#" method="post">
-						<label for="name" class="d-none">Name:</label>
 						<input 
 							type="text" 
 							name="Name" 
+							id="name"
+							aria-label="Name"
 							value="Name" 
 							onfocus="this.value = '';"
 							onblur="if (this.value == '') {this.value = 'Name';}" 
 							required="" 
 						/>
-						<label for="email" class="d-none">Email:</label>
 						<input 
 							type="email" 
+							id="email"
+							aria-label="Email"
 							name="Email" 
 							value="Email" 
 							onfocus="this.value = '';"
 							onblur="if (this.value == '') {this.value = 'Email';}" 
 							required="" 
 						/>
-						<label for="mobile" class="d-none">Mobile:</label>
 						<input 
 							type="text" 
+							id="mobile"
+							aria-label="Mobile"
 							name="Mobile number" 
 							value="Mobile number" 
 							onfocus="this.value = '';"
 							onblur="if (this.value == '') {this.value = 'Mobile number';}" 
 							required="" 
 						/>
-						<label for="message" class="d-none">Message:</label>
 						<textarea 
 							name="Message..." 
+							aria-label="Message"
+							id="message"
 							onfocus="this.value = '';"
 							onblur="if (this.value == '') {this.value = 'Message...';}" 
 							required="">Message...</textarea>
