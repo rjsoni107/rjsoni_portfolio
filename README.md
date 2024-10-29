@@ -1,10 +1,10 @@
-# Raj Soni - Portfolio
+# Kuldeep Soni - Portfolio
 
 Welcome to my portfolio website! 🚀
 
 ## About Me
 
-I’m Raj Soni, a passionate **Front-End Developer** with expertise in crafting intuitive and engaging user interfaces. My skills range from **HTML**, **CSS** and **JavaScript**, with a strong focus on building responsive, accessible, and user-friendly web applications.
+I’m Kuldeep Soni, a passionate **Front-End Developer** with expertise in crafting intuitive and engaging user interfaces. My skills range from **HTML**, **CSS** and **JavaScript**, with a strong focus on building responsive, accessible, and user-friendly web applications.
 
 ## Projects
 
@@ -21,6 +21,6 @@ A personal project built to showcase my skills, projects, and blog posts.
 I frequently share insights on web development, including tips and project breakdowns.
 
 ## Get in Touch
-Feel free to reach out through my [LinkedIn](https://www.linkedin.com/in/raj-soni/) or via email: `raj.soni@gmail.com`.
+Feel free to reach out through my [LinkedIn](https://www.linkedin.com/in/rjsoni107/) or via email: `raj.soni@gmail.com`.
 
-Visit the live portfolio: [rajsoni.vercel.app](https://rajsoni.vercel.app/)
+Visit the live portfolio: [rajsoni.vercel.app](https://rjsoni.vercel.app/)
